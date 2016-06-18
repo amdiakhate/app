@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Network list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for network in networks %}
+            <tr>
+                <td><a href="{{ path('network_show', { 'id': network.id }) }}">{{ network.id }}</a></td>
+                <td>{{ network.url }}</td>
+                <td>{{ network.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('network_show', { 'id': network.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('network_edit', { 'id': network.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('network_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

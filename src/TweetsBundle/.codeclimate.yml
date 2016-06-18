@@ -1,0 +1,14 @@
+languages:
+  PHP: true
+
+ratings:
+  paths:
+    - Command/*
+    - Controller/*
+    - Entity/*
+    - Utils/*
+    - TweetsBundle.php
+
+exclude_paths:
+  - DataFixtures/ORM/*
+  - Tests/*

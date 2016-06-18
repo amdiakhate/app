@@ -1,0 +1,24 @@
+artist_index:
+    path:     /
+    defaults: { _controller: "PeopleBundle:Artist:index" }
+    methods:  GET
+
+artist_show:
+    path:     /{id}/show
+    defaults: { _controller: "PeopleBundle:Artist:show" }
+    methods:  GET
+
+artist_new:
+    path:     /new
+    defaults: { _controller: "PeopleBundle:Artist:new" }
+    methods:  [GET, POST]
+
+artist_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PeopleBundle:Artist:edit" }
+    methods:  [GET, POST]
+
+artist_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PeopleBundle:Artist:delete" }
+    methods:  DELETE

@@ -1,0 +1,18 @@
+# Default
+asynctweets_homepage:
+    path:  /
+    defaults: { _controller: TweetsBundle:Default:index }
+
+asynctweets_tweets_sinceTweetId:
+    path:  /sinceId/{firstTweetId}
+    defaults: { _controller: TweetsBundle:Default:index }
+    requirements:
+        firstTweetId: \d+
+
+asynctweets_reset_cookie:
+    path:  /resetCookie
+    defaults: { _controller: TweetsBundle:Default:resetCookie }
+
+asynctweets_tweets_delete:
+    path:  /tweets/delete/
+    defaults: { _controller: TweetsBundle:Default:deleteLessThan }

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Network</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ network.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ network.url }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ network.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('network_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('network_edit', { 'id': network.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+base:
+    resource: "@BaseBundle/Resources/config/routing.yml"
+    prefix:   /
+
+people:
+    resource: "@PeopleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+app_fetch:
+    resource: "@FetchBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app_tweets:
+    resource: "@TweetsBundle/Resources/config/routing.yml"
+    prefix:   /tweets # Use only "/" if you want AsyncTweets at the root of the website

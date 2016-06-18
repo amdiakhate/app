@@ -1,0 +1,17 @@
+# Managed by Composer
+/vendor/
+
+# PHPUnit
+/phpunit.xml
+
+# Composer PHAR
+/composer.phar
+/composer.lock
+
+# Ignore files created during tests
+/Tests/App/cache/
+/Tests/App/logs/
+/cov/
+
+# Ignore Doxygen directory
+/doxygen/

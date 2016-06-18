@@ -1,0 +1,24 @@
+network_index:
+    path:     /
+    defaults: { _controller: "PeopleBundle:Network:index" }
+    methods:  GET
+
+network_show:
+    path:     /{id}/show
+    defaults: { _controller: "PeopleBundle:Network:show" }
+    methods:  GET
+
+network_new:
+    path:     /new
+    defaults: { _controller: "PeopleBundle:Network:new" }
+    methods:  [GET, POST]
+
+network_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PeopleBundle:Network:edit" }
+    methods:  [GET, POST]
+
+network_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PeopleBundle:Network:delete" }
+    methods:  DELETE

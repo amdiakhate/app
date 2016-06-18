@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Source list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for source in sources %}
+            <tr>
+                <td><a href="{{ path('source_show', { 'id': source.id }) }}">{{ source.id }}</a></td>
+                <td>{{ source.url }}</td>
+                <td>{{ source.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('source_show', { 'id': source.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('source_edit', { 'id': source.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('source_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

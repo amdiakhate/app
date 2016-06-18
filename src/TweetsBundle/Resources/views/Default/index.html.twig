@@ -1,0 +1,81 @@
+{% extends 'TweetsBundle::layout.html.twig' %}
+
+{% block title %}Home timeline - {% if (vars.first is not null)
+    %}since {{ vars.first }}{%
+endif%}{% endblock %}
+
+{% block content %}
+    {# display navigation #}
+    <div class="navigation row">
+        {% set pagination %}
+        <div class="col-sm-5 col-xs-12">
+            <ul class="pagination">
+                <li class="{{ ((vars.previous is null) ? 'disabled') }}">
+                    {% if (vars.previous is not null) %}
+                        <a href="{{ path('asynctweets_tweets_sinceTweetId', {
+                            'firstTweetId': vars.previous
+                        }) }}">«&nbsp;Previous</a>
+                    {% else %}
+                        <span>«&nbsp;Previous</span>
+                    {% endif %}
+                </li>
+                
+                <li class="{{ ((vars.next is null) ? 'disabled') }}">
+                    {% if (vars.next is not null) %}
+                        <a href="{{ path('asynctweets_tweets_sinceTweetId', {
+                            'firstTweetId': vars.next
+                        }) }}">Next&nbsp;»</a>
+                    {% else %}
+                        <span>Next&nbsp;»</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+        {% endset %}
+        
+        {{ pagination }}
+        
+        <div class="col-sm-7 col-xs-12 count alert alert-info">
+            {% if (vars.cookieId is not null) %}
+                <p>
+                    Last tweet id:
+                    <a href="{{ path('asynctweets_tweets_sinceTweetId', {
+                            'firstTweetId': vars.cookieId
+                        }) }}">{{ vars.cookieId }}</a>
+                    <a href="{{ path('asynctweets_reset_cookie') }}"
+                        class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                        Reset cookie
+                    </a>
+                    <a href="{{ path('asynctweets_tweets_delete') }}"
+                        class="btn btn-default btn-xs" id="tweets-delete">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        Delete old tweets
+                    </a>
+                </p>
+            {% endif %}
+            
+            <p>{{ vars.number }} pending tweets</p>
+        </div>
+    </div>
+    
+    <div class="tweets">
+        {% for tweet in tweets %}
+            {% if (tweet.retweetedStatus) %}
+                {% include 'TweetsBundle:Default:retweet_inc.html.twig' %}
+            {% else %}
+                {% include 'TweetsBundle:Default:tweet_inc.html.twig' %}
+            {% endif %}
+        {% else %}
+            <p>No tweet to display.</p>
+        {% endfor %}
+    </div>
+    
+    {# display navigation #}
+    <div class="navigation row">
+        {{ pagination }}
+        <div class="col-sm-7 col-xs-12 alert alert-info" role="alert">
+            Press <kbd>←</kbd> and <kbd>→</kbd> to go to previous or next page.
+        </div>
+    </div>
+{% endblock %}

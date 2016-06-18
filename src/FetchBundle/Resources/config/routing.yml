@@ -1,0 +1,4 @@
+fetch_source:
+    resource: "@FetchBundle/Resources/config/routing/source.yml"
+    prefix:   /source
+

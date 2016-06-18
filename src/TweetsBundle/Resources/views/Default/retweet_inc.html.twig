@@ -1,0 +1,45 @@
+{# see http://getbootstrap.com/components/#media #}
+<div class="media">
+    <div class="media-left media-middle">
+        <img src="{{ tweet.user.profileImageUrlHttpOrHttps }}" width="48" height="48"
+            class="media-object" alt="{{ tweet.user.name }}"
+            title="{{ tweet.user.name }}" />
+    </div>
+    <blockquote class="media-body">
+        {% include 'TweetsBundle:Default:tweet_inc.html.twig'
+            with {
+                'tweet': tweet.retweetedStatus,
+                'mark_as_read_link': false
+        } %}
+        
+        <small>
+            <a href="{{
+                'https://twitter.com/%user_name%'|replace({
+                    '%user_name%': tweet.user.screenName
+                })
+            }}">{{ tweet.user.name }}</a>,
+            <a href="{{
+                'https://twitter.com/%user_name%/status/%tweet_id%'|replace({
+                    '%user_name%': tweet.user.screenName,
+                    '%tweet_id%': tweet.id
+                })
+            }}">{{ tweet.createdAt|date('c') }}</a>
+            
+            <span class="badge">
+                <span class="glyphicon glyphicon-retweet"></span>
+                {{ tweet.retweetCount }}
+            </span>
+            
+            <span class="badge">
+                <span class="glyphicon glyphicon-heart"></span>
+                {{ tweet.favoriteCount }}
+            </span>
+            
+            <a href="{{ path('asynctweets_tweets_sinceTweetId',
+                {'firstTweetId': tweet.id}) }}" class="pull-right">
+                <span class="glyphicon glyphicon-check"></span>
+                Mark as read
+            </a>
+        </small>
+    </blockquote>
+</div>

@@ -1,0 +1,11 @@
+people_artist:
+    resource: "@PeopleBundle/Resources/config/routing/artist.yml"
+    prefix:   /artist
+
+people_homepage:
+    path:     /
+    defaults: { _controller: PeopleBundle:Default:index }
+
+people_network:
+      resource: "@PeopleBundle/Resources/config/routing/network.yml"
+      prefix:   /network
