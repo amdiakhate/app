@@ -39,7 +39,7 @@ class TweetRepository extends EntityRepository
      *
      * @return \Doctrine\ORM\QueryBuilder $query
      */
-    private function getWithUsersAndMediasQuery($qb)
+    private function getWithUsersAndMediasQuery($qb, $network)
     {
         $query = $qb
             ->select('t, user, medias, rt, rt_user')
@@ -49,6 +49,7 @@ class TweetRepository extends EntityRepository
             ->leftJoin('rt.user', 'rt_user')
             // Ignore tweets that were only retweeted
             ->where($qb->expr()->eq('t.in_timeline', 'true'))
+            ->andWhere($qb->expr()->eq('t.network',$network->getId()))
             ->orderBy('t.id', 'ASC')
             ->setFirstResult(0)
             ->setMaxResults($this->nbTweets);
@@ -56,11 +57,11 @@ class TweetRepository extends EntityRepository
         return $query;
     }
 
-    public function getWithUsersAndMedias($firstTweetId = null)
+    public function getWithUsersAndMedias($firstTweetId = null, $network)
     {
         $qb = $this->createQueryBuilder('t');
 
-        $query = $this->getWithUsersAndMediasQuery($qb);
+        $query = $this->getWithUsersAndMediasQuery($qb, $network);
 
         if (!is_null($firstTweetId)) {
             $query = $query->andWhere(
