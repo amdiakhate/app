@@ -5,10 +5,10 @@
 
     <table>
         <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ artist.id }}</td>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ artist.id }}</td>
+            </tr>
         </tbody>
     </table>
 
@@ -21,11 +21,8 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
+                <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
-    {% block tweets %}
-        {{ include('@Tweets/Default/index.html.twig',{'tweets':tweets,'vars': vars}) }}
-    {% endblock %}
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace PeopleBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -73,19 +74,12 @@ class ArtistController extends Controller
 
         $variables = $this->getVariables($request, $tweets, null);
 
-        $response = $this->render(
-            'TweetsBundle:Default:index.html.twig',
-            array(
-                'tweets' => $tweets,
-                'vars' => $variables,
-            )
-        );
-
-        return $response;
-//        return $this->render('artist/show.html.twig', array(
-//            'artist' => $artist,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
+        return $this->render('artist/show.html.twig', array(
+            'artist' => $artist,
+            'delete_form' => $deleteForm->createView(),
+            'tweets' => $tweets,
+            'vars' => $variables,
+        ));
     }
 
     /**
@@ -216,5 +210,20 @@ class ArtistController extends Controller
         $vars['first'] = $firstTweetId;
 
         return ($vars);
+    }
+    /**
+     * @param string $firstTweetId
+     * @return Cookie $cookie
+     */
+    private function createCookie($firstTweetId)
+    {
+        $nextYear = new \Datetime('now');
+        $nextYear->add(new \DateInterval('P1Y'));
+
+        # Set last Tweet Id
+        $cookie = new Cookie('lastTweetId', $firstTweetId,
+            $nextYear->format('U'));
+
+        return($cookie);
     }
 }
